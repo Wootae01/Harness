@@ -1,0 +1,12 @@
+{
+  "name": "wootae-harness",
+  "description": "개인 공통 하네스 마켓플레이스",
+  "owner": { "name": "wootae" },
+  "plugins": [
+    {
+      "name": "harness",
+      "source": "./plugins/harness",
+      "description": "에이전트 우선 개발 하네스 (훅 + 스킬 + 프로젝트 문서 뼈대)"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+# 비밀값 (불변식 I-1) — 키 목록은 .env.example 에
+.env
+.env.*
+!.env.example
+
+# Claude Code 로컬 상태
+.claude/settings.local.json
+.claude/session-logs/
+
+# 의존성 / 빌드 산출물  TODO(stack)
+node_modules/
+dist/
+build/
+
+# IDE
+.idea/workspace.xml

@@ -1,0 +1,10 @@
+{
+  "name": "harness",
+  "displayName": "Harness",
+  "version": "0.1.0",
+  "description": "에이전트 우선 개발 하네스: .env 보호·포맷·세션 요약 훅, review/commit/cleanup/deploy/new-screen 스킬, 프로젝트 문서 뼈대(init)",
+  "author": { "name": "wootae" },
+  "repository": "https://github.com/Wootae01/Harness",
+  "license": "MIT",
+  "keywords": ["harness", "agents-md", "progressive-disclosure", "invariants"]
+}
