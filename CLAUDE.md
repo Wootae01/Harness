@@ -21,6 +21,7 @@
   tools like formatters are used only if the project already has them installed.
 - Hook messages must not reference project docs that may not exist (no `ARCHITECTURE.md`, `docs/...`).
 - Hooks never block work when they fail — except the intentional blocks of protect-env and git-guard (exit 2).
+- When you change a hook or find a command it misses, add the case to `plugins/harness/tests/` first.
 
 ## Language
 
@@ -32,6 +33,7 @@
 
 ```bash
 claude plugin validate .                                   # marketplace + plugin manifests
+node --test "plugins/harness/tests/*.test.mjs"             # hook regression tests (block = exit 2, allow = exit 0)
 claude --plugin-dir plugins/harness                        # run a session with the local plugin, no install
 ```
 

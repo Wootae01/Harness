@@ -26,10 +26,12 @@ argument-hint: "[message hint]"
 ```
 <type>(<scope>): <what, imperative, ≤ 50 chars>
 
-<why — context and reason. The diff already says what was done>
+- <change or reason, one per line — why it was done; the diff already shows what>
+- <another point>
 
 Closes #<N>   (if the branch carries an issue number)
 ```
+- Body: a `- ` bullet list, one sentence per bullet. No prose paragraphs.
 - type: `feat` `fix` `refactor` `docs` `test` `chore` `perf` `build` `ci`
 - scope: the area changed (module, package, `docs`…)
 - Issue number: read it from the branch name, convention `<type>/<N>-<desc>` (e.g. `feat/12-context-detail` → `Closes #12`).
@@ -41,8 +43,9 @@ Closes #<N>   (if the branch carries an issue number)
 For each planned commit, output a ready-to-run block, in order:
 ```bash
 git add <file> <file>
-git commit -m "<subject>" -m "<body>"
+git commit -m "<subject>" -m "- <point>`n- <point>"
 ```
+- In PowerShell, separate bullets with `` `n `` inside double quotes (escape a literal `$` as `` `$ ``). In bash, use a real newline inside the quotes.
 - Keep every command copy-pasteable. Quote messages safely for the user's shell.
 - End with a one-line summary: how many commits, and what is left uncommitted on purpose.
 - **Never push**, and never suggest `--force`.

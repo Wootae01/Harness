@@ -23,6 +23,7 @@
   포맷터 같은 도구는 프로젝트에 이미 설치된 경우에만 쓴다.
 - 훅 메시지는 없을 수도 있는 프로젝트 문서(`ARCHITECTURE.md`, `docs/...`)를 가리키지 않는다.
 - 훅은 실패해도 작업을 막지 않는다 — 단, protect-env 와 git-guard 의 의도된 차단(exit 2)은 예외.
+- 훅을 고치거나 훅이 놓치는 명령을 발견하면, 먼저 `plugins/harness/tests/`에 그 사례를 추가한다.
 
 ## 언어
 
@@ -34,6 +35,7 @@
 
 ```bash
 claude plugin validate .                                   # 마켓플레이스 + 플러그인 매니페스트
+node --test "plugins/harness/tests/*.test.mjs"             # 훅 회귀 테스트 (차단 = exit 2, 통과 = exit 0)
 claude --plugin-dir plugins/harness                        # 설치 없이 로컬 플러그인으로 세션 실행
 ```
 

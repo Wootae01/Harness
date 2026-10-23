@@ -2,7 +2,8 @@
 // PreToolUse 훅 — 커밋·푸시·되돌리기 어려운 git 작업은 사람이 직접 한다.
 // 차단: commit, push, reset --hard, clean -f, filter-branch / filter-repo, checkout/restore 로 작업 내용 버리기
 // 허용: status, diff, log, add, show, branch(조회) 등 읽기·스테이징
-// 한계: 셸 문자열을 단순 분해한다. `bash -c "..."` 처럼 감싼 명령이나 별칭까지 완벽히 막지는 못한다.
+// 감싼 명령도 본다: `bash -c "..."`, `cmd /c ...`, `powershell -Command ...`, `& git`, `(git ...)`, `$(git ...)`, `sudo/env git`
+// 한계: 셸 문자열을 단순 분해한다. git 별칭이나 스크립트 파일 안의 명령까지는 막지 못한다.
 
 const BLOCK = [
   { test: (sub) => sub === "commit", why: "commits are made by the human" },
@@ -17,13 +18,27 @@ const BLOCK = [
 // git 전역 옵션 중 값을 하나 더 받는 것
 const OPTS_WITH_VALUE = new Set(["-C", "-c", "--git-dir", "--work-tree", "--namespace", "--exec-path"]);
 
+// git 앞에 붙어도 결국 git 을 실행하는 것: PowerShell 호출 연산자 & 와 흔한 래퍼
+const PREFIXES = new Set(["&", "sudo", "env", "command", "exec", "nohup", "time"]);
+// 문자열을 다시 셸로 넘기는 것 — 그 문자열 안을 다시 검사한다
+const SHELLS = /^(bash|sh|zsh|dash|cmd|powershell|pwsh)(\.exe)?$/i;
+const SHELL_FLAGS = new Set(["-c", "/c", "/k", "-command"]);
+
 const tokens = (segment) => (segment.match(/"[^"]*"|'[^']*'|\S+/g) ?? []).map((t) => t.replace(/^["']|["']$/g, ""));
 
-function findBlocked(command) {
-  for (const segment of command.split(/&&|\|\||;|\||\n/)) {
+function findBlocked(command, depth = 0) {
+  // 괄호·$( )·백틱도 구분자로 본다 → (git push), $(git push) 의 git 이 맨 앞에 온다
+  for (const segment of command.split(/&&|\|\||;|\||\n|\$\(|[()`{}]/)) {
     const t = tokens(segment);
-    while (t.length && /^\w+=/.test(t[0])) t.shift(); // FOO=bar git ...
-    if (!t.length || !/(^|[\\/])git(\.exe)?$/i.test(t[0])) continue;
+    while (t.length && (/^\w+=/.test(t[0]) || PREFIXES.has(t[0]))) t.shift(); // FOO=bar git ..., & git ...
+    if (!t.length) continue;
+    if (SHELLS.test(t[0]) && depth < 3) {
+      const flag = t.findIndex((a) => SHELL_FLAGS.has(a.toLowerCase()));
+      const hit = flag > 0 && findBlocked(t.slice(flag + 1).join(" "), depth + 1);
+      if (hit) return hit;
+      continue;
+    }
+    if (!/(^|[\\/])git(\.exe)?$/i.test(t[0])) continue;
     let i = 1;
     while (i < t.length && t[i].startsWith("-")) i += OPTS_WITH_VALUE.has(t[i]) ? 2 : 1;
     const sub = t[i];

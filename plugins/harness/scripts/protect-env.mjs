@@ -7,8 +7,8 @@ import path from "node:path";
 
 const ALLOWED_SUFFIX = /\.(example|sample|template|dist)$/i;
 const ENV_NAME = /^\.env(\.[\w.-]+)?$/i;
-// 셸 명령 안에서 .env 토큰 찾기: 앞은 경계 문자, 뒤는 공백/구분자/끝
-const ENV_IN_CMD = /(?:^|[\s"'`=/\\<>|;&(:])(\.env(?:\.[\w-]+)*)(?=$|[\s"'`;|&)<>,])/g;
+// 셸 명령·glob 안에서 .env 토큰 찾기: 앞은 경계 문자, 뒤는 공백/구분자/glob 문자/끝
+const ENV_IN_CMD = /(?:^|[\s"'`=/\\<>|;&(:{,])(\.env(?:\.[\w-]+)*)(?=$|[\s"'`;|&)<>,}*?[])/g;
 
 function isProtectedPath(p) {
   if (!p || typeof p !== "string") return false;
