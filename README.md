@@ -19,7 +19,7 @@ claude plugin install workflow@wootae-harness     # 선택
 
 | 종류 | 이름 | 설명 |
 |---|---|---|
-| 스킬 | `/harness:commit` | 의도 단위로 커밋을 나누고 실행할 명령을 넘겨줌 (실행은 직접). 브랜치 `feat/12-...`면 `Closes #12` 추가 |
+| 스킬 | `/harness:commit-message` | 의도 단위로 커밋을 나누고 실행할 명령을 넘겨줌 (실행은 직접). 브랜치 `feat/12-...`면 `Closes #12` 추가 |
 | 훅 | protect-env | `.env*` 접근 차단 (`.env.example`은 허용) |
 | 훅 | git-guard | 에이전트의 `git commit`·`push`·`reset --hard` 등 차단 — **커밋은 사람이 직접** |
 | 훅 | format | 수정한 파일을 프로젝트에 설치된 포맷터로 정리 (없으면 건너뜀) |

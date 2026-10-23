@@ -32,7 +32,7 @@ In the scope (argument: context/path; default: the area with the most recent cha
 - Re-check documents whose "Last reviewed" date in `design-docs/index.md` is old.
 
 ## 4. Fix or record
-- **Small and safe** (no behavior change): fix it now. One intent = one commit (`/harness:commit`, type `refactor` or `docs`).
+- **Small and safe** (no behavior change): fix it now. One intent = one commit (`/harness:commit-message`, type `refactor` or `docs`).
 - **Large or behavior-changing**: do not fix it — add a row to `tech-debt-tracker.md`.
 - **When you find the same drift a second time**: propose promoting it to a lint or structural test, and add a row to the invariant table in `ARCHITECTURE.md`.
 

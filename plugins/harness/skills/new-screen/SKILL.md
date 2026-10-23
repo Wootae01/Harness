@@ -44,4 +44,4 @@ Rules:
 ## 5. Finish
 - Tick the acceptance-criteria checkboxes in the spec.
 - If you created a new shared component, add it to `docs/DESIGN.md`.
-- `/harness:review` → `/harness:commit` (`feat(<context>): add <ScreenName> screen`).
+- `/harness:review` → `/harness:commit-message` (`feat(<context>): add <ScreenName> screen`).

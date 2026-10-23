@@ -66,5 +66,5 @@ grep -rn "TODO(stack)" CLAUDE.md ARCHITECTURE.md docs/ || true
 - 채운 것: ...
 - 남은 TODO(stack): <파일:줄 목록>
 - 사람이 채울 것: PRODUCT_SENSE.md, core-beliefs.md 팀 취향
-- 다음: 변경사항 확인 후 /harness:commit
+- 다음: 변경사항 확인 후 /harness:commit-message
 ```

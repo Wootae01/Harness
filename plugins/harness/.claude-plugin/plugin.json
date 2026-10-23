@@ -1,8 +1,8 @@
 {
   "name": "harness",
   "displayName": "Harness",
-  "version": "0.2.1",
-  "description": "안전 장치 하네스: .env 보호·git 위험 명령 차단·포맷 훅, commit 스킬",
+  "version": "0.3.0",
+  "description": "안전 장치 하네스: .env 보호·git 위험 명령 차단·포맷 훅, commit-message 스킬",
   "author": { "name": "wootae" },
   "repository": "https://github.com/Wootae01/Harness",
   "license": "MIT",

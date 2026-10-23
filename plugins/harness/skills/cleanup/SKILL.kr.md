@@ -34,7 +34,7 @@ argument-hint: "[범위: 컨텍스트/경로 | docs | all]"
 - `design-docs/index.md`에서 "마지막 검토"가 오래된 문서를 다시 확인한다.
 
 ## 4. 고치거나 기록하기
-- **작고 안전한 것**(동작 변화 없음): 바로 고친다. 하나의 의도 = 하나의 커밋 (`/harness:commit`, type `refactor` 또는 `docs`).
+- **작고 안전한 것**(동작 변화 없음): 바로 고친다. 하나의 의도 = 하나의 커밋 (`/harness:commit-message`, type `refactor` 또는 `docs`).
 - **크거나 동작이 바뀌는 것**: 고치지 말고 `tech-debt-tracker.md`에 행을 추가한다.
 - **같은 드리프트를 두 번째로 발견하면**: 린트나 구조 테스트로 승격하자고 제안하고, `ARCHITECTURE.md` 불변식 표에 행을 추가한다.
 

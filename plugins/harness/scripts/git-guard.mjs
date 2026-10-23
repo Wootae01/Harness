@@ -74,7 +74,7 @@ function check(input) {
       `Rule: the agent never commits, pushes, or runs irreversible git operations.`,
       `How to proceed:`,
       `  - Stage files with \`git add <path>\` if useful, then show the human the exact command to run.`,
-      `  - For commits, use /harness:commit — it prepares the commits and hands the commands to the human.`,
+      `  - For commits, use /harness:commit-message — it prepares the commits and hands the commands to the human.`,
     ].join("\n") + "\n",
   );
   process.exit(2);
