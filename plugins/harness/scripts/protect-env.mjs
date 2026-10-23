@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// PreToolUse 훅 — 불변식 I-1: 에이전트는 .env* 를 읽거나/쓰거나/출력하지 않는다.
+// PreToolUse 훅 — 에이전트는 .env* 를 읽거나/쓰거나/출력하지 않는다.
 // 허용: .env.example / .env.sample / .env.template / .env.dist
 // 차단 시 exit 2 + stderr → 메시지가 에이전트에게 수정 지침으로 전달된다.
 
@@ -28,11 +28,11 @@ function block(target, tool) {
   process.stderr.write(
     [
       `⛔ [protect-env] ${tool} tried to access the protected secrets file '${target}'.`,
-      `Invariant I-1 (ARCHITECTURE.md §3): the agent never reads, writes or prints .env* files.`,
+      `Rule: the agent never reads, writes or prints .env* files.`,
       `How to proceed:`,
       `  - Read .env.example for the required key names (keys only, no values).`,
       `  - If a new key is needed, add the key to .env.example and ask the human for the real value.`,
-      `  - In code, go through the config module that parses and validates env at startup (docs/SECURITY.md).`,
+      `  - In code, read secrets through the project's config/env module, never by opening .env directly.`,
     ].join("\n") + "\n",
   );
   process.exit(2);

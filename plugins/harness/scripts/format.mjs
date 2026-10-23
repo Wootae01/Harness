@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// PostToolUse 훅 — 불변식 I-10: 수정한 파일은 포맷터를 통과한다.
+// PostToolUse 훅 — 수정한 파일은 포맷터를 통과한다.
 // 스택 중립: 프로젝트에 설치된 포맷터만 사용한다 (설치되어 있지 않으면 조용히 넘어간다).
 // 포맷 실패가 작업을 막지는 않는다 (항상 exit 0). 구현은 자유, 포맷은 강제.
 
@@ -50,7 +50,7 @@ process.stdin.on("end", () => {
     const file = input.tool_input?.file_path;
     if (!file || !fs.existsSync(file)) return;
     const rel = path.relative(root, file).replace(/\\/g, "/");
-    if (rel.startsWith("..") || rel.startsWith("docs/generated/") || /(^|\/)\.env/.test(rel)) return;
+    if (rel.startsWith("..") || /(^|\/)\.env/.test(rel)) return;
     for (const cmd of candidates(file)) {
       if (run(cmd)) return;
     }

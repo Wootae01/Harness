@@ -6,7 +6,7 @@
     {
       "name": "harness",
       "source": "./plugins/harness",
-      "description": "에이전트 우선 개발 하네스 (훅 + 스킬 + 프로젝트 문서 뼈대)"
+      "description": "안전 장치 하네스 (훅 + commit 스킬)"
     }
   ]
 }

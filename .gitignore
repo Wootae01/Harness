@@ -2,6 +2,5 @@
 .env.*
 !.env.example
 .claude/settings.local.json
-.claude/session-logs/
 node_modules/
-.idea/workspace.xml
+.idea/

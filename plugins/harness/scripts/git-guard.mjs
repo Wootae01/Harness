@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// PreToolUse 훅 — 불변식 I-11: 커밋·푸시·되돌리기 어려운 git 작업은 사람이 직접 한다.
+// PreToolUse 훅 — 커밋·푸시·되돌리기 어려운 git 작업은 사람이 직접 한다.
 // 차단: commit, push, reset --hard, clean -f, filter-branch / filter-repo, checkout/restore 로 작업 내용 버리기
 // 허용: status, diff, log, add, show, branch(조회) 등 읽기·스테이징
 // 한계: 셸 문자열을 단순 분해한다. `bash -c "..."` 처럼 감싼 명령이나 별칭까지 완벽히 막지는 못한다.
@@ -50,7 +50,7 @@ process.stdin.on("end", () => {
   process.stderr.write(
     [
       `⛔ [git-guard] blocked: \`${hit.cmd}\` — ${hit.why}.`,
-      `Invariant I-11 (ARCHITECTURE.md §3): the agent never commits, pushes, or runs irreversible git operations.`,
+      `Rule: the agent never commits, pushes, or runs irreversible git operations.`,
       `How to proceed:`,
       `  - Stage files with \`git add <path>\` if useful, then show the human the exact command to run.`,
       `  - For commits, use /harness:commit — it prepares the commits and hands the commands to the human.`,
