@@ -1,0 +1,10 @@
+{
+  "name": "workflow",
+  "displayName": "Workflow",
+  "version": "0.1.0",
+  "description": "작업 흐름 편의 기능: 세션 시작 시 브랜치 이슈·handoff 메모 불러오기, handoff·usage 스킬",
+  "author": { "name": "wootae" },
+  "repository": "https://github.com/Wootae01/Harness",
+  "license": "MIT",
+  "keywords": ["workflow", "handoff", "github-issues", "token-usage"]
+}

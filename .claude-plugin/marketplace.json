@@ -7,6 +7,11 @@
       "name": "harness",
       "source": "./plugins/harness",
       "description": "안전 장치 하네스 (훅 + commit 스킬)"
+    },
+    {
+      "name": "workflow",
+      "source": "./plugins/workflow",
+      "description": "작업 흐름 편의 기능 (브랜치 이슈·handoff 자동 불러오기, handoff·usage 스킬)"
     }
   ]
 }
