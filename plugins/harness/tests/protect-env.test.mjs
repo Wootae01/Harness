@@ -47,5 +47,7 @@ for (const [tool, input] of ALLOWED) {
   test(`allows: ${tool} ${JSON.stringify(input)}`, () => assert.equal(run(tool, input), 0));
 }
 
-test("broken input never blocks", () => assert.equal(runRaw("protect-env.mjs", "not json"), 0));
-test("missing input never blocks", () => assert.equal(run("Read", undefined), 0));
+// 판단할 수 없으면 막는다 (fail closed)
+test("broken input blocks", () => assert.equal(runRaw("protect-env.mjs", "not json"), 2));
+test("null input blocks", () => assert.equal(runRaw("protect-env.mjs", "null"), 2));
+test("missing tool_input blocks", () => assert.equal(run("Read", undefined), 2));

@@ -22,6 +22,9 @@ claude plugin install harness@wootae-harness
 | 훅 | git-guard | 에이전트의 `git commit`·`push`·`reset --hard` 등 차단 — **커밋은 사람이 직접** |
 | 훅 | format | 수정한 파일을 프로젝트에 설치된 포맷터로 정리 (없으면 건너뜀) |
 
+protect-env 와 git-guard 는 **검사를 못 하면 막는다**. 훅이 고장 나서 모든 명령이 막히면,
+`claude plugin disable harness@wootae-harness` 로 잠시 끄고 고친 뒤 다시 켠다 (`enable`).
+
 ## 업데이트
 
 플러그인을 업데이트하면 모든 프로젝트에 바로 반영된다. 배포하는 쪽에서 `plugin.json`의 `version`을 올려야 한다.

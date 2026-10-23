@@ -20,7 +20,8 @@
 - **No stack-specific values in skills or scripts.** Commands come from the project's own CLAUDE.md;
   tools like formatters are used only if the project already has them installed.
 - Hook messages must not reference project docs that may not exist (no `ARCHITECTURE.md`, `docs/...`).
-- Hooks never block work when they fail — except the intentional blocks of protect-env and git-guard (exit 2).
+- **Safety hooks fail closed.** If protect-env or git-guard cannot inspect a call (unreadable input, missing fields, an exception),
+  they block it (exit 2) and say the hook may be broken. A hook that is not a safety check (format) never blocks.
 - When you change a hook or find a command it misses, add the case to `plugins/harness/tests/` first.
 
 ## Language

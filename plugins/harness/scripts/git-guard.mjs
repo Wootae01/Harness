@@ -49,18 +49,24 @@ function findBlocked(command, depth = 0) {
   return null;
 }
 
-let raw = "";
-process.stdin.setEncoding("utf8");
-process.stdin.on("data", (c) => (raw += c));
-process.stdin.on("end", () => {
-  let input;
-  try {
-    input = JSON.parse(raw);
-  } catch {
-    process.exit(0); // 입력을 못 읽으면 막지 않는다 (훅 고장이 작업을 멈추지 않도록)
-  }
+// 판단할 수 없으면 막는다 (fail closed) — 입력을 못 읽거나 스크립트가 예외로 죽으면 통과가 아니라 차단
+function failClosed(reason) {
+  process.stderr.write(
+    [
+      `⛔ [git-guard] could not inspect this command (${reason}), so it was blocked to be safe.`,
+      `How to proceed:`,
+      `  - Do not retry or work around it. Tell the human the git-guard hook may be broken.`,
+      `  - The human can check: node on PATH, the harness plugin version, or disable the plugin temporarily.`,
+    ].join("\n") + "\n",
+  );
+  process.exit(2);
+}
+
+function check(input) {
   if (input.tool_name !== "Bash" && input.tool_name !== "PowerShell") process.exit(0);
-  const hit = findBlocked(input.tool_input?.command ?? "");
+  const command = input.tool_input?.command;
+  if (typeof command !== "string") failClosed("missing command");
+  const hit = findBlocked(command);
   if (!hit) process.exit(0);
   process.stderr.write(
     [
@@ -72,4 +78,22 @@ process.stdin.on("end", () => {
     ].join("\n") + "\n",
   );
   process.exit(2);
+}
+
+let raw = "";
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (c) => (raw += c));
+process.stdin.on("end", () => {
+  let input;
+  try {
+    input = JSON.parse(raw);
+  } catch {
+    failClosed("unreadable input");
+  }
+  if (!input || typeof input !== "object") failClosed("unreadable input");
+  try {
+    check(input);
+  } catch (e) {
+    failClosed(`hook error: ${e.message}`);
+  }
 });

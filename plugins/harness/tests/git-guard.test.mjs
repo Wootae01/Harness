@@ -67,5 +67,8 @@ for (const cmd of ALLOWED) {
 
 test("PowerShell tool is guarded too", () => assert.equal(run("git push", "PowerShell"), 2));
 test("other tools are ignored", () => assert.equal(runHook("git-guard.mjs", "Read", { file_path: "x" }), 0));
-test("broken input never blocks", () => assert.equal(runRaw("git-guard.mjs", "not json"), 0));
-test("missing command never blocks", () => assert.equal(runHook("git-guard.mjs", "Bash", undefined), 0));
+// 판단할 수 없으면 막는다 (fail closed)
+test("broken input blocks", () => assert.equal(runRaw("git-guard.mjs", "not json"), 2));
+test("null input blocks", () => assert.equal(runRaw("git-guard.mjs", "null"), 2));
+test("missing command blocks", () => assert.equal(runHook("git-guard.mjs", "Bash", undefined), 2));
+test("non-string command blocks", () => assert.equal(runHook("git-guard.mjs", "Bash", { command: 123 }), 2));
