@@ -9,13 +9,13 @@
 |---|---|---|
 | `.claude-plugin/marketplace.json` | Marketplace definition (lists both plugins) | Install address |
 | `plugins/*/.claude-plugin/plugin.json` | Plugin definition, **version** | User updates |
-| `plugins/harness/` | **Safety**: hooks protect-env, git-guard, format + `/harness:commit` | **Every installed project, immediately** |
+| `plugins/harness/` | **Safety**: hooks protect-env, git-guard, format + `/harness:commit-message` | **Every installed project, immediately** |
 | `plugins/workflow/` | **Convenience**: SessionStart branch context + `/workflow:handoff`, `/workflow:usage` | **Every installed project, immediately** |
 | `plugins/*/tests/` | Regression tests (`node:test`) | — |
 
 ## Shared / project boundary (invariants of this repo)
 
-- **harness is safety only.** Hooks that prevent damage (secrets, irreversible git) and `/harness:commit`.
+- **harness is safety only.** Hooks that prevent damage (secrets, irreversible git) and `/harness:commit-message`.
   Workflow conveniences go in `workflow`, which may change often. Add a rule only after a real failure shows it is needed.
 - **No stack-specific values in skills or scripts.** Commands come from the project's own CLAUDE.md;
   tools like formatters are used only if the project already has them installed.
@@ -23,7 +23,7 @@
 - **Safety hooks fail closed.** If protect-env or git-guard cannot inspect a call (unreadable input, missing fields, an exception),
   they block it (exit 2) and say the hook may be broken. A hook that is not a safety check (format, workflow's session-context) never blocks.
 - When you change a hook or find a command it misses, add the case to `plugins/<plugin>/tests/` first.
-- Branch convention `<type>/<issue#>-<desc>` is read by `plugins/workflow/scripts/branch.mjs`; the handoff skill and `/harness:commit` follow the same rule.
+- Branch convention `<type>/<issue#>-<desc>` is read by `plugins/workflow/scripts/branch.mjs`; the handoff skill and `/harness:commit-message` follow the same rule.
 - Borrowed code keeps its license: `plugins/workflow/LICENSE.mattpocock` covers the handoff skill.
 
 ## Language

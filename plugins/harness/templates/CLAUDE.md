@@ -9,7 +9,7 @@
 1. Does this task belong to an **active execution plan**? → `docs/exec-plans/active/`
 2. What are the **invariants** for the area you will touch? → `ARCHITECTURE.md` §3
 3. What is the product intent? → `docs/product-specs/index.md`
-4. When done: `/harness:review` → `/harness:commit`
+4. When done: `/harness:review` → `/harness:commit-message`
 
 ## 1. Core principles (details: `docs/design-docs/core-beliefs.md`)
 
@@ -49,7 +49,7 @@
 |---|---|
 | `/harness:new-screen <Name>` | Add a new screen |
 | `/harness:review` | Self-review before commit (repeat until it passes) |
-| `/harness:commit` | After review passes: split into commits and hand you the git commands (you run them) |
+| `/harness:commit-message` | After review passes: split into commits and hand you the git commands (you run them) |
 | `/harness:cleanup` | Clean up drift, update quality grades and debt |
 | `/harness:deploy` | Deploy (only when a human invokes it; config in `docs/DEPLOY.md`) |
 
@@ -78,7 +78,7 @@ node scripts/check-docs.mjs    # knowledge-base check: broken links, missing ind
 
 ## 6. How to work
 
-- **Small change**: implement → `/harness:review` → `/harness:commit`.
+- **Small change**: implement → `/harness:review` → `/harness:commit-message`.
 - **Large change** (many files, many sessions, or design judgment): write a plan in `docs/exec-plans/active/` first (`docs/PLANS.md`).
   Keep its progress log and decision log up to date; move it to `completed/` when done.
 - **Verify it yourself.** Run the app and confirm through logs and the UI. "Should work" is not done.

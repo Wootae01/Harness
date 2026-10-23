@@ -11,13 +11,13 @@
 |---|---|---|
 | `.claude-plugin/marketplace.json` | 마켓플레이스 정의 (플러그인 두 개 등록) | 설치 주소 |
 | `plugins/*/.claude-plugin/plugin.json` | 플러그인 정의, **version** | 사용자 업데이트 |
-| `plugins/harness/` | **안전 장치**: 훅 protect-env, git-guard, format + `/harness:commit` | **설치된 모든 프로젝트 즉시** |
+| `plugins/harness/` | **안전 장치**: 훅 protect-env, git-guard, format + `/harness:commit-message` | **설치된 모든 프로젝트 즉시** |
 | `plugins/workflow/` | **편의 기능**: SessionStart 브랜치 맥락 + `/workflow:handoff`, `/workflow:usage` | **설치된 모든 프로젝트 즉시** |
 | `plugins/*/tests/` | 회귀 테스트 (`node:test`) | — |
 
 ## 공통/프로젝트 경계 (이 저장소의 불변식)
 
-- **harness 는 안전 장치만 담는다.** 피해를 막는 훅(비밀값, 되돌릴 수 없는 git)과 `/harness:commit`.
+- **harness 는 안전 장치만 담는다.** 피해를 막는 훅(비밀값, 되돌릴 수 없는 git)과 `/harness:commit-message`.
   작업 흐름 편의 기능은 자주 바뀌어도 되는 `workflow`에 둔다. 규칙은 실제로 문제가 생겨 필요성이 확인된 뒤에만 추가한다.
 - **스킬과 스크립트에는 스택별 값을 넣지 않는다.** 명령은 프로젝트 자신의 CLAUDE.md에서 읽고,
   포맷터 같은 도구는 프로젝트에 이미 설치된 경우에만 쓴다.
@@ -25,7 +25,7 @@
 - **안전 훅은 판단할 수 없으면 막는다 (fail closed).** protect-env 나 git-guard 가 호출을 검사하지 못하면(입력을 못 읽음, 필드 누락, 예외)
   차단(exit 2)하고 훅이 고장 났을 수 있다고 알린다. 안전 검사가 아닌 훅(format, workflow 의 session-context)은 절대 막지 않는다.
 - 훅을 고치거나 훅이 놓치는 명령을 발견하면, 먼저 `plugins/<플러그인>/tests/`에 그 사례를 추가한다.
-- 브랜치 규칙 `<type>/<이슈번호>-<설명>`은 `plugins/workflow/scripts/branch.mjs`가 읽는다. handoff 스킬과 `/harness:commit`도 같은 규칙을 따른다.
+- 브랜치 규칙 `<type>/<이슈번호>-<설명>`은 `plugins/workflow/scripts/branch.mjs`가 읽는다. handoff 스킬과 `/harness:commit-message`도 같은 규칙을 따른다.
 - 가져온 코드는 원래 라이선스를 유지한다: handoff 스킬은 `plugins/workflow/LICENSE.mattpocock`.
 
 ## 언어

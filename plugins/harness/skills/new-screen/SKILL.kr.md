@@ -46,4 +46,4 @@ argument-hint: "<ScreenName> [context]"
 ## 5. 마무리
 - 스펙의 수용 기준 체크박스를 갱신한다.
 - 새 공용 컴포넌트를 만들었다면 `docs/DESIGN.md`에 추가한다.
-- `/harness:review` → `/harness:commit` (`feat(<context>): add <ScreenName> screen`).
+- `/harness:review` → `/harness:commit-message` (`feat(<context>): add <ScreenName> screen`).

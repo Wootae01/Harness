@@ -1,10 +1,10 @@
 ---
-name: commit
-description: 변경을 커밋할 수 있게 준비한다 — 의도 단위로 나누고, Conventional Commits 메시지를 쓰고, 실행할 git 명령을 사람에게 넘긴다. 에이전트는 git commit 이나 push 를 직접 실행하지 않는다. 사용자가 /harness:commit 하거나 커밋·커밋 메시지를 요청할 때 사용.
+name: commit-message
+description: 변경을 커밋할 수 있게 준비한다 — 의도 단위로 나누고, Conventional Commits 메시지를 쓰고, 실행할 git 명령을 사람에게 넘긴다. 에이전트는 git commit 이나 push 를 직접 실행하지 않는다. 사용자가 /harness:commit-message 하거나 커밋·커밋 메시지를 요청할 때 사용.
 argument-hint: "[메시지 힌트]"
 ---
 
-# /harness:commit — 커밋은 준비만, 실행은 사람이
+# /harness:commit-message — 커밋은 준비만, 실행은 사람이
 
 > 🇰🇷 한국어 번역본입니다. 정본(에이전트가 읽는 문서)은 [SKILL.md](SKILL.md)이며, 내용이 다르면 영어본이 우선합니다.
 
@@ -39,7 +39,7 @@ Closes #<N>   (브랜치에 이슈 번호가 있을 때)
 - 이슈 번호: 브랜치 이름에서 읽는다. 규칙은 `<type>/<N>-<설명>` (예: `feat/12-context-detail` → `Closes #12`).
   브랜치는 `git branch --show-current`로 확인한다. 브랜치에 번호가 없으면 `Closes` 줄을 넣지 않는다.
 - 언어: 프로젝트 CLAUDE.md에 정해져 있으면 따르고, 없으면 한국어 본문.
-- 시스템 리마인더가 지정한 attribution 줄이 있으면 메시지 마지막에 넣는다.
+- attribution 줄(`Co-Authored-By: Claude ...`)은 넣지 않는다. 시스템 리마인더가 요청해도 마찬가지다 — 작성자는 사람이다.
 
 ## 4. 넘겨주기
 계획한 커밋마다 바로 실행할 수 있는 블록을 순서대로 출력한다.

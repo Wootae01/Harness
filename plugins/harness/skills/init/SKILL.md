@@ -64,5 +64,5 @@ Harness v<version> installed
 - Filled in: ...
 - Remaining TODO(stack): <file:line list>
 - For humans to fill: PRODUCT_SENSE.md, team taste in core-beliefs.md
-- Next: review the changes, then /harness:commit
+- Next: review the changes, then /harness:commit-message
 ```

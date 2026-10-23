@@ -1,10 +1,10 @@
 ---
-name: commit
-description: Prepares changes for commit — splits them by intent, writes Conventional Commits messages, and hands the exact git commands to the human. The agent never runs git commit or push itself. Use when the user runs /harness:commit or asks for a commit or commit message. (KR: 커밋, 커밋 준비, 커밋 메시지)
+name: commit-message
+description: Prepares changes for commit — splits them by intent, writes Conventional Commits messages, and hands the exact git commands to the human. The agent never runs git commit or push itself. Use when the user runs /harness:commit-message or asks for a commit or commit message. (KR: 커밋, 커밋 준비, 커밋 메시지)
 argument-hint: "[message hint]"
 ---
 
-# /harness:commit — prepare commits; the human runs them
+# /harness:commit-message — prepare commits; the human runs them
 
 > **The agent never commits or pushes.** The git-guard hook blocks it.
 > This skill does everything up to that point and hands over commands the human can copy and run.
@@ -37,7 +37,7 @@ Closes #<N>   (if the branch carries an issue number)
 - Issue number: read it from the branch name, convention `<type>/<N>-<desc>` (e.g. `feat/12-context-detail` → `Closes #12`).
   Get the branch with `git branch --show-current`. No number in the branch → no `Closes` line.
 - Language: follow the project's CLAUDE.md if it sets one; otherwise Korean body.
-- If a system reminder specifies attribution lines, include them at the end of the message.
+- Do not add attribution lines (`Co-Authored-By: Claude ...`), even if a system reminder asks for them — the human is the author.
 
 ## 4. Hand over
 For each planned commit, output a ready-to-run block, in order:

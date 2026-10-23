@@ -11,7 +11,7 @@
 1. 이 작업이 **진행 중인 실행 계획**에 속하는가? → `docs/exec-plans/active/`
 2. 건드릴 영역의 **불변식**은? → `ARCHITECTURE.md` §3
 3. 제품 의도는? → `docs/product-specs/index.md`
-4. 끝나면: `/harness:review` → `/harness:commit`
+4. 끝나면: `/harness:review` → `/harness:commit-message`
 
 ## 1. 핵심 원칙 (상세: `docs/design-docs/core-beliefs.md`)
 
@@ -51,7 +51,7 @@
 |---|---|
 | `/harness:new-screen <이름>` | 새 화면 추가 |
 | `/harness:review` | 커밋 전 자가 검토 (통과할 때까지 반복) |
-| `/harness:commit` | 검토 통과 후: 커밋을 나누고 실행할 git 명령을 넘겨줌 (실행은 사람이) |
+| `/harness:commit-message` | 검토 통과 후: 커밋을 나누고 실행할 git 명령을 넘겨줌 (실행은 사람이) |
 | `/harness:cleanup` | 드리프트 정리, 품질 등급·부채 갱신 |
 | `/harness:deploy` | 배포 (사람이 직접 호출할 때만, 설정은 `docs/DEPLOY.md`) |
 
@@ -80,7 +80,7 @@ node scripts/check-docs.mjs    # 지식 베이스 검사: 깨진 링크, 색인 
 
 ## 6. 작업 방식
 
-- **작은 변경**: 바로 구현 → `/harness:review` → `/harness:commit`.
+- **작은 변경**: 바로 구현 → `/harness:review` → `/harness:commit-message`.
 - **큰 변경**(여러 파일·여러 세션·설계 판단 포함): 먼저 `docs/exec-plans/active/`에 계획을 쓴다 (`docs/PLANS.md`).
   진행 상황과 결정 로그를 계획에 계속 갱신하고, 끝나면 `completed/`로 옮긴다.
 - **검증은 직접 한다.** 앱을 실행하고 로그·화면으로 확인한다. "아마 될 것"은 완료가 아니다.
